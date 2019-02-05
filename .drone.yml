@@ -1,0 +1,16 @@
+pipeline:
+  deploy-dev:
+    image: peloton/drone-helm:0.0.3
+    chart: ./helm/chomat
+    values:
+    - image.tag=latest
+    - image.annotations.deployedDate="${DRONE_BUILD_CREATED}"
+    - image.annotations.buildNumber="${DRONE_BUILD_NUMBER}"
+    release: chomat
+    namespace: chomatdam
+    wait: true
+    timeout: 200
+    secrets: [ api_server, kubernetes_token ]
+    when:
+      event: [ push ]
+      branch: master
