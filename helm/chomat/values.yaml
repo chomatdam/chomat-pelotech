@@ -18,7 +18,8 @@ service:
 
 ingress:
   enabled: true
-  annotations: {}
+  annotations:
+    certmanager.k8s.io/cluster-issuer: letsencrypt-production
   paths: /
   hosts:
     - chomat.pelo.tech
